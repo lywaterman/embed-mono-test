@@ -25,22 +25,25 @@ int main (int argc, char *argv) {
 	if (!MyWorld)
 		assert(0);
 
-	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "Run", 1);
+	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "root", 0);
 
-	MonoObject* myworld = mono_object_new(domain, MyWorld);
-    mono_runtime_object_init(myworld);
+	//MonoObject* myworld = mono_object_new(domain, MyWorld);
+    //mono_runtime_object_init(myworld);
 
-	if (!myworld) 
-		assert(0);
+	//if (!myworld) 
+	//	assert(0);
 
 	if (!run_method) 
 		assert(0);
 
-	MonoString* string = mono_string_new(domain, "using System;");
 
-	void* args[1];
+	mono_runtime_invoke(run_method, NULL, NULL, NULL);
 
-	args[0] = string;
+	//MonoString* string = mono_string_new(domain, "using System;");
 
-	mono_runtime_invoke(run_method, myworld, args, NULL);
+	//void* args[1];
+
+	//args[0] = string;
+
+	//mono_runtime_invoke(run_method, myworld, args, NULL);
 }
