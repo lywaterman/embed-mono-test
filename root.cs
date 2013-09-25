@@ -18,6 +18,8 @@ class MyWorld {
 	}
 
     public static void Main(string[] args) {
+        Console.WriteLine(
+                System.Reflection.Assembly.GetExecutingAssembly().ImageRuntimeVersion);
         MyWorld world = new MyWorld();
     }
 }

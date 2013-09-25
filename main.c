@@ -8,9 +8,9 @@ int main (int argc, char *argv) {
 
 	mono_config_parse(NULL);
 
-	MonoDomain *domain = mono_jit_init_version("root", "v4.0");
+	MonoDomain *domain = mono_jit_init_version("root", "v4.0.30319");
 
-	MonoAssembly *assembly = mono_domain_assembly_open(domain, "root.dll");
+	MonoAssembly *assembly = mono_domain_assembly_open(domain, "root.exe");
 
 	MonoImage *image = mono_assembly_get_image(assembly);
 
