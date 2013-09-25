@@ -1,0 +1,7 @@
+Program('main', ['main.c'],
+		LIBS = ['monosgen-2.0'],
+        CCFLAGS = ['-m32'],
+        LINKFLAGS = ['-m32'],
+		LIBPATH = ['/usr/local/lib', '/Library/Frameworks/Mono.framework/Libraries'],
+		CPPPATH = ['/usr/local/include', '/Library/Frameworks/Mono.framework/Headers/mono-2.0'],
+		) 

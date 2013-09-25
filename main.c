@@ -8,7 +8,7 @@ int main (int argc, char *argv) {
 
 	mono_config_parse(NULL);
 
-	MonoDomain *domain = mono_jit_init("root");
+	MonoDomain *domain = mono_jit_init_version("root", "v4.0");
 
 	MonoAssembly *assembly = mono_domain_assembly_open(domain, "root.dll");
 
@@ -28,6 +28,7 @@ int main (int argc, char *argv) {
 	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "Run", 1);
 
 	MonoObject* myworld = mono_object_new(domain, MyWorld);
+    mono_runtime_object_init(myworld);
 
 	if (!myworld) 
 		assert(0);

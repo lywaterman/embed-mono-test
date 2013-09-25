@@ -4,14 +4,21 @@ using Mono.CSharp;
 class MyWorld {
 	public Evaluator evaluator;
 
-	public MyWorld (string [] args)
+	public MyWorld ()
 	{
-		evaluator = new Evaluator (new CompilerContext(new CompilerSettings(), new ConsoleReportPrinter()));
+        Console.WriteLine("sdfsf");
+        var settings = new CompilerSettings() {Unsafe = true};
+        var printer = new ConsoleReportPrinter ();
+		evaluator = new Evaluator (new CompilerContext(settings, printer));
 	}
 
 	public bool Run(string code) {
 		Console.WriteLine(code);
 		return evaluator.Run("var x = 1;");
 	}
+
+    public static void Main(string[] args) {
+        MyWorld world = new MyWorld();
+    }
 }
 
