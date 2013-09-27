@@ -67,6 +67,11 @@ class MyWorld {
 		Console.WriteLine(str);
 	}
 
+	public static void printlnInt(int str) {
+		Console.WriteLine(str);
+	}
+
+
     public static void Main(string[] args) {
         Console.WriteLine(
                 System.Reflection.Assembly.GetExecutingAssembly().ImageRuntimeVersion);

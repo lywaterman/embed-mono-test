@@ -1,5 +1,6 @@
 #include <mono/jit/jit.h>
 #include <mono/metadata/assembly.h>
+#include <mono/metadata/object.h>
 #include <assert.h>
 
 void call_print(MonoDomain* domain, MonoImage* image, const char* str) {
@@ -12,6 +13,19 @@ void call_print(MonoDomain* domain, MonoImage* image, const char* str) {
 
 	void* args[1];
 	args[0] = mono_string_new(domain, str);
+	mono_runtime_invoke(run_method, NULL, args, NULL);
+}
+
+void call_printInt(MonoDomain* domain, MonoImage* image, int32_t str) {
+	MonoClass * MyWorld = mono_class_from_name(image, "", "MyWorld");
+
+	if (!MyWorld)
+		assert(0);
+
+	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "printlnInt", 1);
+
+	void* args[1];
+	args[0] = &str;
 	mono_runtime_invoke(run_method, NULL, args, NULL);
 }
 
@@ -102,6 +116,11 @@ void main (int argc, char *argv) {
 
 	} else if (cls == mono_get_int32_class()) {
 		call_print(domain, image, "i am int32");
+		
+		int32_t p = *(int32_t*)mono_object_unbox(ooo);
+
+		call_printInt(domain, image, p);
+
 	} else if (cls == mono_get_int64_class()) {
 
 	} else if (cls == mono_get_double_class()) {
