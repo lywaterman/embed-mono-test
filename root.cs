@@ -34,11 +34,13 @@ class MyWorld {
 		return evaluator.Run("var x = 1;");
 	}
 
-    public static MyPair[] root(MyHashtable ht) {
+	public static MyWorld world;
+
+    public static int root(MyHashtable ht) {
 		Console.WriteLine(ht);
 
 		ht.Add("a", 1);
-        MyWorld world = new MyWorld();
+        world = new MyWorld();
 
         string file_gamedata = File.ReadAllText("game_data.cs");
 
@@ -52,13 +54,21 @@ class MyWorld {
 
 		MyPair[] aa = new MyPair[] {new MyPair("a", 1), new MyPair("b", 2)};
 
-		return aa;
+		return 1;
     }
+
+	public static object call(string str) {
+		Console.WriteLine("sdfdsfdsfdsfdsfdsfdsfdsfdsf");
+		return world.evaluator.Evaluate(str);
+	}	
+
+	public static void println(string str) {
+		Console.WriteLine(str);
+	}
 
     public static void Main(string[] args) {
         Console.WriteLine(
                 System.Reflection.Assembly.GetExecutingAssembly().ImageRuntimeVersion);
-        MyWorld world = new MyWorld();
     }
 }
 

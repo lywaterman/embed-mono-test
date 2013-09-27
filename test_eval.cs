@@ -3,9 +3,8 @@ GameData gd = new GameData();
 
 var sw = new Stopwatch();
 
-
 sw.Start();
-Console.WriteLine(GameFunc.fib(40));
+//Console.WriteLine(GameFunc.fib(40));
 sw.Stop();
 
 TimeSpan ts = sw.Elapsed;

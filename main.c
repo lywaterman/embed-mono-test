@@ -2,7 +2,34 @@
 #include <mono/metadata/assembly.h>
 #include <assert.h>
 
-int main (int argc, char *argv) {
+void call_print(MonoDomain* domain, MonoImage* image, const char* str) {
+	MonoClass * MyWorld = mono_class_from_name(image, "", "MyWorld");
+
+	if (!MyWorld)
+		assert(0);
+
+	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "println", 1);
+
+	void* args[1];
+	args[0] = mono_string_new(domain, str);
+	mono_runtime_invoke(run_method, NULL, args, NULL);
+}
+
+MonoObject* call_func(MonoDomain* domain, MonoImage* image, const char* str) {
+	MonoClass * MyWorld = mono_class_from_name(image, "", "MyWorld");
+
+	if (!MyWorld)
+		assert(0);
+
+	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "call", 1);
+
+	void* args[1];
+	args[0] = mono_string_new(domain, str);
+	return mono_runtime_invoke(run_method, NULL, args, NULL);
+}
+
+
+void main (int argc, char *argv) {
 
 	mono_set_dirs("/usr/local/lib", "/etc");
 
@@ -48,16 +75,40 @@ int main (int argc, char *argv) {
 
 	args[0] = obj;
 
-	MonoArray * array =  (MonoArray*)mono_runtime_invoke(run_method, NULL, args, NULL);
+	mono_runtime_invoke(run_method, NULL, args, NULL);
+
+	MonoObject * array = call_func(domain, image, "GameFunc.fib(40);");
+
+	call_print(domain, image, mono_class_get_name(mono_object_get_class(array)));
 	
-	assert(array != NULL);
-	int length = mono_array_length(array);
 
-	assert(length == 2);
+	MonoClass * cls = mono_object_get_class(array);
 
-	printf("length");
-	printf("length:%d", length);
-	//从array里面解析
+	if (cls == mono_get_int16_class()) {
+
+	} else if (cls == mono_get_int32_class()) {
+		call_print(domain, image, "i am int32");
+	} else if (cls == mono_get_int64_class()) {
+
+	} else if (cls == mono_get_double_class()) {
+
+	} else if (cls == mono_get_string_class()) {
+
+	} else if (cls == mono_get_uint16_class()) {
+
+	} else if (cls == mono_get_uint32_class()) {
+
+	} else if (cls == mono_get_uint64_class()) {
+
+	} else if (cls == mono_get_array_class()) {
+
+	} else if (cls == mono_get_boolean_class()) {
+		call_print(domain,image, "i am boolean");
+	} else if (cls == mono_get_void_class()) {
+		call_print(domain,image, "i am void");
+	}
+
+
 
 	//MonoString* string = mono_string_new(domain, "using System;");
 
@@ -67,3 +118,5 @@ int main (int argc, char *argv) {
 
 	//mono_runtime_invoke(run_method, myworld, args, NULL);
 }
+
+
