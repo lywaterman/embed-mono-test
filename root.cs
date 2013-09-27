@@ -1,6 +1,22 @@
 using System;
 using Mono.CSharp;
 using System.IO;
+using System.Collections;
+
+public class MyPair {
+	string key;
+	object value;
+
+	public MyPair(string key, object value) {
+		this.key = key;
+		this.value = value;
+	}
+}
+
+public class MyHashtable : Hashtable {
+	
+
+}
 
 class MyWorld {
 	public Evaluator evaluator;
@@ -18,8 +34,10 @@ class MyWorld {
 		return evaluator.Run("var x = 1;");
 	}
 
-    public static void root() {
+    public static MyPair[] root(MyHashtable ht) {
+		Console.WriteLine(ht);
 
+		ht.Add("a", 1);
         MyWorld world = new MyWorld();
 
         string file_gamedata = File.ReadAllText("game_data.cs");
@@ -31,6 +49,10 @@ class MyWorld {
         world.evaluator.Run(file_gamedata);
         world.evaluator.Run(file_gamefunc);
         world.evaluator.Run(file_test_eval);
+
+		MyPair[] aa = new MyPair[] {new MyPair("a", 1), new MyPair("b", 2)};
+
+		return aa;
     }
 
     public static void Main(string[] args) {

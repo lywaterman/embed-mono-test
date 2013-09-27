@@ -25,7 +25,7 @@ int main (int argc, char *argv) {
 	if (!MyWorld)
 		assert(0);
 
-	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "root", 0);
+	MonoMethod* run_method = mono_class_get_method_from_name(MyWorld, "root", 1);
 
 	//MonoObject* myworld = mono_object_new(domain, MyWorld);
     //mono_runtime_object_init(myworld);
@@ -36,8 +36,28 @@ int main (int argc, char *argv) {
 	if (!run_method) 
 		assert(0);
 
+	MonoClass *ht_class = mono_class_from_name_case(image, "", "MyHashtable");
 
-	mono_runtime_invoke(run_method, NULL, NULL, NULL);
+	MonoObject * obj = mono_object_new(domain, ht_class);
+    mono_runtime_object_init(obj);
+
+	if (!obj) 
+		assert(0);
+
+	void* args[1];
+
+	args[0] = obj;
+
+	MonoArray * array =  (MonoArray*)mono_runtime_invoke(run_method, NULL, args, NULL);
+	
+	assert(array != NULL);
+	int length = mono_array_length(array);
+
+	assert(length == 2);
+
+	printf("length");
+	printf("length:%d", length);
+	//从array里面解析
 
 	//MonoString* string = mono_string_new(domain, "using System;");
 

@@ -1,1 +1,1 @@
-mcs /reference:Mono.CSharp.dll root.cs ##-target:library root.cs
+mcs /reference:Mono.CSharp.dll,mscorlib.dll root.cs ##-target:library root.cs
