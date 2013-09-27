@@ -28,6 +28,12 @@ MonoObject* call_func(MonoDomain* domain, MonoImage* image, const char* str) {
 	return mono_runtime_invoke(run_method, NULL, args, NULL);
 }
 
+MonoObject* call(MonoClass* clz, const char* mname, int arg_count, void** args) {
+	MonoMethod* run_method = mono_class_get_method_from_name(clz, mname, arg_count);
+	
+	return mono_runtime_invoke(run_method, NULL, args, NULL);
+}
+
 
 void main (int argc, char *argv) {
 
@@ -77,14 +83,21 @@ void main (int argc, char *argv) {
 
 	mono_runtime_invoke(run_method, NULL, args, NULL);
 
-	MonoObject * array = call_func(domain, image, "GameFunc.printself(\"123456----------------------------------------\");");
+	MonoObject * array = call_func(domain, image, "game_object");
 	//MonoObject * array = call_func(domain, image, "GameFunc.fib(40);");
-
-	call_print(domain, image, mono_class_get_name(mono_object_get_class(array)));
+	//
 	
+	MonoClass * cls1 = mono_object_get_class(array);
 
-	MonoClass * cls = mono_object_get_class(array);
+	int x = 40;
+	void* xxx[1];
+	xxx[0] = &x; 
 
+	MonoObject* ooo = call(cls1, "fib", 1, xxx);
+
+	call_print(domain, image, mono_class_get_name(mono_object_get_class(ooo)));
+	MonoClass * cls = mono_object_get_class(ooo);
+	
 	if (cls == mono_get_int16_class()) {
 
 	} else if (cls == mono_get_int32_class()) {

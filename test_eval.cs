@@ -14,6 +14,8 @@ string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
         ts.Milliseconds / 10);
 Console.WriteLine("RunTime " + elapsedTime);
 
+var game_object = new GameFunc();
+
 //Console.WriteLine(GameFunc.getX(gd));
 
 

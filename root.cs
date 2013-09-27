@@ -52,6 +52,8 @@ class MyWorld {
         world.evaluator.Run(file_gamefunc);
         world.evaluator.Run(file_test_eval);
 
+		Console.WriteLine("start call");
+
 		MyPair[] aa = new MyPair[] {new MyPair("a", 1), new MyPair("b", 2)};
 
 		return 1;
