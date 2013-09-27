@@ -2,6 +2,7 @@
 #include <mono/metadata/assembly.h>
 #include <mono/metadata/object.h>
 #include <assert.h>
+#include <string.h>
 
 void call_print(MonoDomain* domain, MonoImage* image, const char* str) {
 	MonoClass * MyWorld = mono_class_from_name(image, "", "MyWorld");
@@ -110,36 +111,21 @@ void main (int argc, char *argv) {
 	MonoObject* ooo = call(cls1, "fib", 1, xxx);
 
 	//感觉还是用名字靠谱
+	const char* class_name = mono_class_get_name(mono_object_get_class(ooo));
 	call_print(domain, image, mono_class_get_name(mono_object_get_class(ooo)));
 	MonoClass * cls = mono_object_get_class(ooo);
 	
-	if (cls == mono_get_int16_class()) {
+	if (strcmp(class_name, "Int16") == 0) {
 
-	} else if (cls == mono_get_int32_class()) {
+	} else if (strcmp(class_name, "Int32") == 0) {
 		call_print(domain, image, "i am int32");
 		
 		int32_t p = *(int32_t*)mono_object_unbox(ooo);
 
 		call_printInt(domain, image, p);
 
-	} else if (cls == mono_get_int64_class()) {
+	} else if (strcmp(class_name, "Int64") == 0) {
 
-	} else if (cls == mono_get_double_class()) {
-
-	} else if (cls == mono_get_string_class()) {
-
-	} else if (cls == mono_get_uint16_class()) {
-
-	} else if (cls == mono_get_uint32_class()) {
-
-	} else if (cls == mono_get_uint64_class()) {
-
-	} else if (cls == mono_get_array_class()) {
-		call_print(domain,image, "i am array");
-	} else if (cls == mono_get_boolean_class()) {
-		call_print(domain,image, "i am boolean");
-	} else if (cls == mono_get_void_class()) {
-		call_print(domain,image, "i am void");
 	}
 
 
