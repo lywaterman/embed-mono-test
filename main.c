@@ -109,6 +109,7 @@ void main (int argc, char *argv) {
 
 	MonoObject* ooo = call(cls1, "fib", 1, xxx);
 
+	//感觉还是用名字靠谱
 	call_print(domain, image, mono_class_get_name(mono_object_get_class(ooo)));
 	MonoClass * cls = mono_object_get_class(ooo);
 	
@@ -134,7 +135,7 @@ void main (int argc, char *argv) {
 	} else if (cls == mono_get_uint64_class()) {
 
 	} else if (cls == mono_get_array_class()) {
-
+		call_print(domain,image, "i am array");
 	} else if (cls == mono_get_boolean_class()) {
 		call_print(domain,image, "i am boolean");
 	} else if (cls == mono_get_void_class()) {

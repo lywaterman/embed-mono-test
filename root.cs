@@ -3,16 +3,6 @@ using Mono.CSharp;
 using System.IO;
 using System.Collections;
 
-public class MyPair {
-	string key;
-	object value;
-
-	public MyPair(string key, object value) {
-		this.key = key;
-		this.value = value;
-	}
-}
-
 public class MyHashtable : Hashtable {
 	
 
@@ -54,8 +44,6 @@ class MyWorld {
 
 		Console.WriteLine("start call");
 
-		MyPair[] aa = new MyPair[] {new MyPair("a", 1), new MyPair("b", 2)};
-
 		return 1;
     }
 
@@ -67,7 +55,7 @@ class MyWorld {
 		Console.WriteLine(str);
 	}
 
-	public static void printlnInt(int str) {
+	public static void printlnInt(Int32 str) {
 		Console.WriteLine(str);
 	}
 
