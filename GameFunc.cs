@@ -3,6 +3,11 @@ public class GameFunc {
         return gd.x; 
     }
 
+	public static string printself(string str) {
+		Console.WriteLine(str);
+		return str;
+	}
+
     public static int fib(int n) {
         if (n < 2) {
             return n;

@@ -77,7 +77,8 @@ void main (int argc, char *argv) {
 
 	mono_runtime_invoke(run_method, NULL, args, NULL);
 
-	MonoObject * array = call_func(domain, image, "GameFunc.fib(40);");
+	MonoObject * array = call_func(domain, image, "GameFunc.printself(\"123456----------------------------------------\");");
+	//MonoObject * array = call_func(domain, image, "GameFunc.fib(40);");
 
 	call_print(domain, image, mono_class_get_name(mono_object_get_class(array)));
 	

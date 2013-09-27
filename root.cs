@@ -58,7 +58,6 @@ class MyWorld {
     }
 
 	public static object call(string str) {
-		Console.WriteLine("sdfdsfdsfdsfdsfdsfdsfdsfdsf");
 		return world.evaluator.Evaluate(str);
 	}	
 
