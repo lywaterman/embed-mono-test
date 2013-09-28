@@ -110,10 +110,17 @@ void main (int argc, char *argv) {
 
 	MonoObject* ooo = call(cls1, "fib", 1, xxx);
 
+	ooo = call_func(domain, image, "object x = 1; x;");
+
+	if (!ooo)
+		assert(0);
+
 	//感觉还是用名字靠谱
 	const char* class_name = mono_class_get_name(mono_object_get_class(ooo));
 	call_print(domain, image, mono_class_get_name(mono_object_get_class(ooo)));
 	MonoClass * cls = mono_object_get_class(ooo);
+
+	call_print(domain, image, class_name);
 	
 	if (strcmp(class_name, "Int16") == 0) {
 

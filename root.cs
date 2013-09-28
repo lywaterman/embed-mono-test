@@ -8,6 +8,11 @@ public class MyHashtable : Hashtable {
 
 }
 
+public class MyPair {
+	public object key = "";
+	public object value = null;
+}
+
 class MyWorld {
 	public Evaluator evaluator;
 
